@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Makes sure the footer stays at the bottom */
+        }
+
+        .navbar {
+            background-color:  #427006;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .content {
+            flex: 1; /* Makes the content take up remaining vertical space */
+            padding: 20px;
+        }
+
+        .card {
+            width: 18rem;
+            margin-right: 10px; /* Horizontal spacing between cards */
+        }
+
+        .footer {
+            background-color:#8dc740;
+            color: #fff;
+            margin: 220px 1px;
+            position:relative;
+            width: 100%;
+            bottom:0;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-info">
+        {{ message }}
+    </div>
+{% endfor %}
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Grocery Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/summary">Summary</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div>
+    {% if cards %}
+    <div class="d-flex flex-wrap">
+        {% for card in cards %}
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ card.c_name }}</h6>
+                
+                <a href="/product/{{ card.id }}" class="btn btn-light">Show products</a>
+                <br>
+                <a href="/edit_category/{{ card.id }}" class="btn btn-light">Edit</a>
+                <a href="/delete_category/{{ card.id }}" onclick="showAlert()" class="btn btn-light">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No categories created, please add them now.</p>
+    {% endif %}
+</div>
+<br>
+<div class = "Content">
+<a href = "/add_category" class = "btn btn-outline-success">Add category</a>
+    <!-- <input type="submit" class="btn btn-outline-success btn-login" href="/add_category" value="Add category"> -->
+</div>
+
+<br>
+<br>
+<script>
+    function showAlert() {
+        alert("Are you sure you want to delete it?");
+    }
+    </script>
+</body>
+</html>
+<!-- Footer -->
+<div class="footer">
+    &copy; 2023 Grocery Store
+</div>

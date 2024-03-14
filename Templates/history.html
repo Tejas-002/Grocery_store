@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cart</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #d1eed0;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Makes sure the footer stays at the bottom */
+        }
+
+        .navbar {
+            background-color:#427006;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            color: #0c0101;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #130101;
+            font-size: 18px;
+        }
+
+        .content {
+            flex: 1;
+            /* Makes the content take up remaining vertical space */
+            padding: 20px;
+        }
+
+        .lgn {
+            background-color: #f1f5f4;
+            border: 2px solid #f8f4f4;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .lgn h1 {
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 0;
+        }
+
+        .form-floating input[type="text"],
+        .form-floating input[type="password"],
+        .form-floating input[type="email"] {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        .btn-register {
+            margin-top: 21px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #050000;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #6ab04c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4b8032;
+        }
+
+        tfoot td {
+            font-weight: bold;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color:#0b3f01;
+            color: #fff;
+            position:relative;
+            margin:250px 1px;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head> 
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Grocery Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/userfeed">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            
+            </div>
+        </div>
+    </nav>
+    <div>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Shopping History</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.c_name }}</td>
+                        <td>{{ item.p_name }}</td>
+                        <td>{{item.quantity}} {{ item.unit | replace('Rs/', '')}}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity * item.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+    <footer>
+         <div class="footer">
+            &copy; 2023 Grocery Store
+        </div>
+    </footer>
+</body>
+</html>
